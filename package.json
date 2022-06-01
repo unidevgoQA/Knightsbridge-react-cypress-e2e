@@ -1,0 +1,45 @@
+{
+  "name": "cypress-page-object-model",
+  "version": "1.0.26",
+  "description": "Cypress Page Object Basic Model ( Ready To Use ) - UI Test Automation Design Pattern for Cypress.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/padmarajnidagundi/Cypress-POM-Ready-To-Use"
+  },
+  "keywords": [
+    "cypress",
+    "cypress.io",
+    "chai",
+    "POM",
+    "framework",
+    "browser",
+    "testing",
+    "end-to-end",
+    "integration",
+    "test",
+    "architecture",
+    "page-object-model",
+    "UAT",
+    "E2E",
+    "angular",
+    "AngularJS",
+    "nextjs",
+    "react",
+    "reactjs",
+    "javascript",
+    "cypress-testing-library",
+    "cypress-npm",
+    "automation",
+    "cypress-api"
+  ],
+  "author": "Padmaraj Nidagundi",
+  "license": "MIT",
+  "homepage": "https://www.linkedin.com/in/padmarajn/",
+  "dependencies": {
+    "cypress": "^9.7.0"
+  }
+}
