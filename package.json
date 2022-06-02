@@ -39,7 +39,10 @@
   "author": "Padmaraj Nidagundi",
   "license": "MIT",
   "homepage": "https://www.linkedin.com/in/padmarajn/",
+  "devDependencies": {
+    "cypress": "^10.0.1"
+  },
   "dependencies": {
-    "cypress": "^9.7.0"
+    "cypress-iframe": "^1.0.1"
   }
 }
