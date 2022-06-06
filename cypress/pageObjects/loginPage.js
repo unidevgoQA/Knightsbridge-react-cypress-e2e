@@ -6,7 +6,6 @@ require('cypress-xpath')
 
 class LoginPage {
 
-
     getLoginPage = () => {
         cy.visit("https://qa.knights.app")
     }
