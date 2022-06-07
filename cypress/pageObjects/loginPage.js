@@ -47,7 +47,7 @@ class LoginPage {
         Actions.typeText('[data-testid="email-input"]', 'ss.unidev' + "+" + Math.round(Math.random * 10000) + '@gmail.com');
         Actions.typeText('[data-testid="password-input"]', '5946644Ss@');
         Actions.typeText('[data-testid="confirm-password-input"]', '5946644Ss@');
-        cy.get('[for=":r0:"] > .Checkbox_inner__qg6mX > .Checkbox_tick__HP-JJ').click();
+        cy.get('[for=":r2:"] > .Checkbox_inner__qg6mX > .Checkbox_tick__HP-JJ').click()
 
         cy.iframe('[title="reCAPTCHA"]').then((iframe) => {
             cy.wrap(iframe)
@@ -55,6 +55,7 @@ class LoginPage {
                 .should('be.visible')
                 .click();
         });
+
         waits.wait();
         cy.get('[data-testid="signup-submit-button"]').click();
         cy.xpath('//*[contains(text(), "Enter your security code")]').should('be.visible');
