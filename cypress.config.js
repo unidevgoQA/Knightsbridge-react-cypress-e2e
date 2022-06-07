@@ -7,6 +7,12 @@ module.exports = defineConfig({
   viewportHeight: 1080,
   screenshotsFolder: 'mochawesome-report/assets',
   chromeWebSecurity: false,
+  "reporter": "cypress-mochawesome-reporter",
+  "reporterOptions": {
+    "reportDir": "cypress/report",
+    "charts": true,
+    "reportPageTitle": "custom-title"
+  },
   firefoxGcInterval: {
     runMode: null,
     openMode: null,

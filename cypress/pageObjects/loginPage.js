@@ -36,14 +36,15 @@ class LoginPage {
     }
 
     signUp = () => {
-        let newCount = Utilities.readCounter().then(function (count) {
-            console.log(count);
-            return count;
-        });
+        let count = Utilities.readCounter().then(number => {
+            return number;
+        })
 
         cy.visit("https://qa.knights.app/signup");
 
-        Actions.typeText('[data-testid="email-input"]', 'ss.unidev' + "+" + Math.round(Math.random() * 1000) + '@gmail.com');
+        cy.get('[data-testid="name-input"]').type(Utilities.getRandomFirstName());
+        cy.get('[data-testid="surname-input"]').type(Utilities.getRandomLastName());
+        Actions.typeText('[data-testid="email-input"]', 'ss.unidev' + "+" + Math.round(Math.random * 10000) + '@gmail.com');
         Actions.typeText('[data-testid="password-input"]', '5946644Ss@');
         Actions.typeText('[data-testid="confirm-password-input"]', '5946644Ss@');
         cy.get('[for=":r0:"] > .Checkbox_inner__qg6mX > .Checkbox_tick__HP-JJ').click();
