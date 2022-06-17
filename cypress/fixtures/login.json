@@ -1,4 +1,7 @@
 {
-  "email": "ss.unidev@gmail.com",
-  "password": "5946644Ss@"
+  "email": "unidevgo.qa1+testermunna@gmail.com",
+  "password": "Test@123",
+  "emailPrefix": "ss.unidev",
+  "emailSuffix": "@gmail.com",
+  "counter": 10
 }

@@ -24,4 +24,13 @@ export class Actions {
         cy.get(selector).clear();
     }
 
+    static readFile = (path) => {
+        return cy.readFile(path);
+    }
+
+    static getLoginData = () => {
+        return cy.readFile(Cypress.env('login_data_path'));
+    }
+
+
 }

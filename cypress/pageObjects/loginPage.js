@@ -1,7 +1,8 @@
 import "cypress-iframe";
 import {Waits, Waits as waits} from "../support/waits"
 import {Actions} from "../support/actions";
-import {Utilities} from "../support/utilities";
+
+import {TestData} from "../fixtures/testData";
 require('cypress-xpath')
 
 class LoginPage {
@@ -10,9 +11,15 @@ class LoginPage {
         cy.visit("https://qa.knights.app")
     }
 
+    /*
+    This method used to log in to the application
+     */
     doLogin = () => {
-        cy.get('[data-testid="email-input"]').type('ss.unidev+1@gmail.com');
-        cy.get('[data-testid="password-input"]').type('5946644Ss@');
+        // entering valid login credentials
+        Actions.getLoginData().then(data => {
+            cy.get('[data-testid="email-input"]').type(data.email);
+            cy.get('[data-testid="password-input"]').type(data.password);
+        });
 
         cy.iframe('[title="reCAPTCHA"]').then((iframe) => {
             cy.wrap(iframe)
@@ -25,7 +32,6 @@ class LoginPage {
         cy.get('[data-testid="signin-submit-button"]').click();
 
         cy.contains("Today’s Cryptocurrency prices").should('be.visible');
-
     }
 
     logOut = () => {
@@ -34,19 +40,27 @@ class LoginPage {
         cy.xpath('//*[contains(text(),\'Sign in\')]').should('be.visible');
     }
 
-    signUp = () => {
-        let count = Utilities.readCounter().then(number => {
-            return number;
-        })
+    enterEmail = (pre, suf) => {
+        TestData.writeCounterFile();
+        cy.readFile(Cypress.env('login_data_path')).then(data => {
+            let email = TestData.generateEmailAlias(pre, data.counter, suf);
+            cy.get('[data-testid="email-input"]').clear().type(email);
+        });
+        return this;
+    }
 
+    signUp = () => {
         cy.visit("https://qa.knights.app/signup");
 
-        cy.get('[data-testid="name-input"]').type(Utilities.getRandomFirstName());
-        cy.get('[data-testid="surname-input"]').type(Utilities.getRandomLastName());
-        Actions.typeText('[data-testid="email-input"]', 'ss.unidev' + "+" + Math.round(Math.random * 10000) + '@gmail.com');
+        cy.get('[data-testid="name-input"]').type(TestData.getFirstname());
+        cy.get('[data-testid="surname-input"]').type(TestData.getFirstname());
+
+        Actions.readFile(Cypress.env('login_data_path')).then(data => {
+            this.enterEmail(data.emailPrefix, data.emailSuffix);
+        });
+
         Actions.typeText('[data-testid="password-input"]', '5946644Ss@');
-        Actions.typeText('[data-testid="confirm-password-input"]', '5946644Ss@');
-        cy.get('[for=":r2:"] > .Checkbox_inner__qg6mX > .Checkbox_tick__HP-JJ').click()
+        cy.get('[for=":r1:"] > .Checkbox_inner__qg6mX > .Checkbox_tick__HP-JJ').click()
 
         cy.iframe('[title="reCAPTCHA"]').then((iframe) => {
             cy.wrap(iframe)
