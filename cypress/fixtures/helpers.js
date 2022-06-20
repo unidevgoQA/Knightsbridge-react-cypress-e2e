@@ -34,8 +34,8 @@ export const getEmailFromInbox = (email, password, apiKey) => {
 }
 
 export const getOTPFromEmail = (email, password, apiKey, regex) => {
-    getEmailFromInbox(email, password, apiKey).then(body => {
-        let matches = body.match(regex);
+    return getEmailFromInbox(email, password, apiKey).then(body => {
+            let matches = body.match(regex);
             return matches[1];
     }
     );

@@ -3,6 +3,8 @@ import {Waits, Waits as waits} from "../support/waits"
 import {Actions} from "../support/actions";
 
 import {TestData} from "../fixtures/testData";
+import {getOTPFromEmail} from "../fixtures/helpers";
+import * as url from "url";
 require('cypress-xpath')
 
 class LoginPage {
@@ -69,10 +71,20 @@ class LoginPage {
                 .click();
         });
 
-        waits.wait();
-        cy.get('[data-testid="signup-submit-button"]').click();
-        cy.xpath('//*[contains(text(), "Enter your security code")]').should('be.visible');
+        waits.wait(1);
+        cy.get('[data-testid="signup-submit-button"]').click().then(() => {
+            getOTPFromEmail(
+                "ss.unidev@gmail.com", "ahaobqwwwoyotshm", "shampad", "\\n(\\d{6})"
+            ).then(r => {
+                // cy.xpath('//input[1]').type(r);
+                Waits.wait(5);
+                cy.xpath('//input[1]').type("1");
+            })
+        });
 
+
+
+        cy.xpath('//*[contains(text(), "Enter your security code")]').should('be.visible');
 
     }
 }
