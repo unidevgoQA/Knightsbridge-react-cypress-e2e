@@ -12,7 +12,7 @@ describe('Wallet Page tests', () => {
     const walletPage = new WalletPage();
 
     // wallet page elements
-    const walletButton = "//a[normalize-space()='Wallet']";
+    const walletButton = "(//a[@href='/wallet/overview'])[2]";
     const depositButton = "//a[normalize-space()='Deposit']";
     const withdrawButton = "//a[normalize-space()='Deposit']/following-sibling::button";
     const fiatAndSpot = "//h4[normalize-space()='Fiat and Spot']";
