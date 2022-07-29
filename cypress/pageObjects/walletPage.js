@@ -1,3 +1,4 @@
+import 'cypress-file-upload';
 
 export class WalletPage {
 
@@ -34,6 +35,18 @@ export class WalletPage {
         cy.xpath(this.withdrawUSDTHeader).should('be.visible');
         cy.xpath(this.withdrawBtnOnModal).should('be.visible').click();
         cy.xpath(this.successWithdrawModal).should('be.visible');
+        return this;
+    }
+
+    deposit = () => {
+        cy.contains("a", "Deposit").click();
+        cy.wait(1000);
+        cy.xpath("//button[normalize-space()='Submit']").click({force: true});
+        cy.xpath("//button[normalize-space()='Continue']").click()
+        cy.xpath('//div[@class=\'PaymentDetails_title__b0JjD\']').should('be.visible');
+        cy.xpath('//input[@type=\'file\']').attachFile('images/1.jpeg')
+        cy.xpath("//button[normalize-space()='Confirm deposit request']").click();
+        cy.contains("Yay!").should('be.visible');
         return this;
     }
 

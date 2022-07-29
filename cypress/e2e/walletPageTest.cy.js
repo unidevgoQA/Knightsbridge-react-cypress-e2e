@@ -13,7 +13,7 @@ describe('Wallet Page tests', () => {
 
     // wallet page elements
     const walletButton = "(//a[@href='/wallet/overview'])[2]";
-    const depositButton = "//a[normalize-space()='Deposit']";
+    const depositButton = "//a[@class='button button-small Wallet_button__UnVYI']";
     const withdrawButton = "//a[normalize-space()='Deposit']/following-sibling::button";
     const fiatAndSpot = "//h4[normalize-space()='Fiat and Spot']";
     const fiatAndSpotBalance = "//div[normalize-space()='Fiat and Spot balance']";
@@ -30,31 +30,33 @@ describe('Wallet Page tests', () => {
             openMode: 3
         },
     },() => {
+        cy.clearLocalStorage();
         loginPage.getLoginPage();
+        cy.reload();
         loginPage.doLogin();
         cy.xpath(walletButton).click();
-        cy.xpath(depositButton).should('be.visible');
+        cy.contains("a", "Deposit").should('be.visible');
     });
 
     it('UI Test 1.2 - Verify elements on the wallet page', () => {
-        cy.xpath(depositButton).should('be.visible');
-        cy.xpath(withdrawButton).should('be.visible');
-        cy.xpath(fiatAndSpot).should('be.visible');
-        cy.xpath(fiatAndSpotBalance).should('be.visible');
-        cy.xpath(spotBalance).should('be.visible');
-        cy.xpath(fiatBalance).should('be.visible');
-        cy.xpath(searchCoinInputField).should('be.visible');
-        cy.xpath(activityHistoryLink).should('be.visible');
+        cy.contains("a", "Deposit").should('be.visible');
+        cy.contains("a", "Buy and Sell").should('be.visible');
+
     });
 
-    it('UI Test 1.3 - Verify deposit functionality', () => {
-        walletPage.checkDepositFunctionality();
-    });
+    // it('UI Test 1.3 - Verify deposit functionality', () => {
+    //     walletPage.checkDepositFunctionality();
+    // });
 
-    it('UI Test 1.4 - Verify withdraw functionality', () => {
+    // it('UI Test 1.4 - Verify withdraw functionality', () => {
+    //     // browser back
+    //     cy.go('back');
+    //     walletPage.checkWithdrawFunctionality();
+    // });
+
+    it('UI Test 1.5 - Verify Deposit functionality', () => {
         // browser back
         cy.go('back');
-        walletPage.checkWithdrawFunctionality();
+        walletPage.deposit();
     });
-}
-);
+});
