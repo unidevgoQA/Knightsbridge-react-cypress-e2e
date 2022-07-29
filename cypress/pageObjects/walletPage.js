@@ -50,5 +50,16 @@ export class WalletPage {
         return this;
     }
 
+    checkBuySellPage = () => {
+        cy.visit('https://qa.knights.app/wallet/general')
+        cy.contains("a", "Buy and Sell").click();
+        cy.xpath('//h4[normalize-space()=\'Select pair\']').should('be.visible');
+        cy.xpath('//span[normalize-space()=\'TRX/USDT\']').click();
+        cy.xpath('//button[normalize-space()=\'Select\']').click();
+        cy.wait(2000);
+        cy.url().should('include', '/buy-sell');
+        return this;
+    }
+
 
 }

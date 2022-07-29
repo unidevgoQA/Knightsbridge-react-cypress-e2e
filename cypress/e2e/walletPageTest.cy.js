@@ -59,4 +59,8 @@ describe('Wallet Page tests', () => {
         cy.go('back');
         walletPage.deposit();
     });
+
+    it('UI Test 1.6 - Verify Buy sell page visibility', () => {
+        walletPage.checkBuySellPage();
+    })
 });
